@@ -1,0 +1,20 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+  align-items: center;
+  background-color: #a5a7a5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.container h3 {
+  grid-column: 1 / span 2;
+  margin-bottom: 10px;
+}
+
+.container p {
+  margin: 0;
+}
