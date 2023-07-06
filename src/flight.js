@@ -7,18 +7,13 @@ import "./container.css";
 import "./box.css";
 
 const Flight = () => {
-  const [airlineCode, setAirlineCode] = useState("");
   const [flightNumber, setFlightNumber] = useState("");
   const [flightData, setFlightData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    if (name === "airlineCode") {
-      setAirlineCode(value.toUpperCase());
-    } else if (name === "flightNumber") {
-      setFlightNumber(value.toUpperCase());
-    }
+    const { value } = event.target;
+    setFlightNumber(value.toUpperCase());
   };
 
   const handleSubmit = async (event) => {
@@ -27,13 +22,16 @@ const Flight = () => {
     setLoading(true);
 
     try {
-      const response = await axios.get("http://api.aviationstack.com", {
-        params: {
-          access_key: "4aec590c3d1db38418bc0121679f210b",
-          airline_iata: airlineCode,
-          flight_iata: flightNumber,
-        },
-      });
+      const response = await axios.get(
+        "http://api.aviationstack.com/v1/flights",
+        {
+          params: {
+            access_key: "71f4b486e50c95776449f339eb4488cb",
+
+            flight_iata: flightNumber,
+          },
+        }
+      );
 
       if (response.data.data && response.data.data.length > 0) {
         const flight = response.data.data[0];
@@ -71,15 +69,15 @@ const Flight = () => {
       </form>
       {loading && (
         <div className="centered-container">
-          <div class="dot-spinner">
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
-            <div class="dot-spinner__dot"></div>
+          <div className="dot-spinner">
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
+            <div className="dot-spinner__dot"></div>
           </div>
         </div>
       )}
